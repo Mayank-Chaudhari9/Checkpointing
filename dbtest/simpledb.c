@@ -31,6 +31,8 @@ int  main(int argc, char const *argv[]) {
         fprintf(stderr, "%s\n", mysql_error(connection));
         exit(1);
       }
+      else
+        printf("something is wrong\n");
 
       result = mysql_use_result(connection);
 
