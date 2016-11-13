@@ -1,0 +1,20 @@
+Runing first checkpointing example
+
+1- Go to the example directory
+2- Open console and navigate to that directory
+3- type  "dmtcp_coordinator"
+4- Open new console and compile the example "gcc -o example1 example1.c".
+5- Run the executable with "dmtcp_launch ./example1"
+
+Checkpointing the application
+
+6- Go to dmtcp_coordinator and type "c" for checkpointing.
+              or
+  Open a new console and navigate to the executable location and type "dmtcp_checkpoint ./example1"
+
+
+After checkpointing kill the program and you will get three new files in your directory.
+
+7 - Run the "dmtcp_restart_script.sh" for restarting the application from checkpoint.
+                or
+    You can also run the file_name.dmtcp file using "dmtcp_restart file_name.dmtcp.".H
