@@ -9,7 +9,7 @@ char *puser;
 char *ppassword;
 char *pdatabase;
 
-
+// function to trap the call from actual progarm and get the passed paramerter to initialize the global varibles used next time
 MYSQL *mysql_real_connect(MYSQL *mysql,const char *host, const char *user, const char *passwd,const char *db,unsigned int port,const char *unix_socket,unsigned long client_flag )
 {
   printf("present here\n");
@@ -19,8 +19,11 @@ MYSQL *mysql_real_connect(MYSQL *mysql,const char *host, const char *user, const
   puser=user;
   ppassword=passwd;
   pdatabase=db;
+  //totest whether the values are being trapped or not
   //printf("%s\n",passwd );
+  //NEXT_FNC to transfer control to the actual function
   NEXT_FNC(mysql_real_connect)(connection,host,user,passwd,db,0,NULL,0);
+  //uncomment to check whether the connection structure is being populated or not
   //printf(" passwd : %s\n",connection->passwd );
   return connection;
 }
