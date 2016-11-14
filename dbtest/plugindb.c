@@ -2,6 +2,7 @@
 #include <sys/time.h>
 #include <mysql/mysql.h>
 #include "dmtcp.h"
+#include "config.h"
 
 MYSQL *pconnection,*connection;
 char *pserver;
@@ -15,10 +16,10 @@ MYSQL *mysql_real_connect(MYSQL *mysql,const char *host, const char *user, const
   printf("present here\n");
   connection=mysql;
   pconnection=mysql;
-  pserver=host;
-  puser=user;
-  ppassword=passwd;
-  pdatabase=db;
+  //pserver=host;
+  //puser=user;
+  //ppassword=passwd;
+  //pdatabase=db;
   //totest whether the values are being trapped or not
   //printf("%s\n",passwd );
   //NEXT_FNC to transfer control to the actual function
@@ -32,21 +33,23 @@ MYSQL *mysql_real_connect(MYSQL *mysql,const char *host, const char *user, const
 
 static void checkpoint()
 {
+  printf("pdatabase : %s\n",pconnection->db );
   //mysql_close(connection);
   printf("---------#####  the %s plugin is being called before checkpinting. ##### ------------\n",__FILE__);
 }
 
 static void resume()
 {
-  pconnection=NULL;
-  mysql_real_connect(pconnection,pserver,puser,ppassword,pdatabase,0,NULL,0);
-  printf("------#### The %s plugin has no been checkpointed. #### ------------\n", __FILE__);
+  connection = mysql_init(NULL);
+NEXT_FNC(mysql_real_connect)(connection,pserver,puser,ppassword,pdatabase,0,NULL,0);
+  printf("------#### The %s plugin has  been checkpointed. #### ------------\n", __FILE__);
+  //return connection;
 }
 
 static DmtcpBarrier barriers[]={
-  {DMTCP_GLOBAL_BARRIER_PRE_CKPT,checkpoint,
+  {DMTCP_GLOBAL_BARRIER_PRE_CKPT, checkpoint,
   "checkpoint"},
-  {DMTCP_GLOBAL_BARRIER_RESUME,resume,"resume"}
+  {DMTCP_GLOBAL_BARRIER_RESUME, resume, "resume"}
 };
 
 DmtcpPluginDescriptor_t plugindb={

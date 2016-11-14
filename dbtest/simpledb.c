@@ -2,7 +2,7 @@
   compile with following command
     gcc -o test $(mysql_config --cflags) simpledb.c $(mysql_config --libs)
 */
-
+#include <unistd.h>
 #include <mysql/mysql.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,7 +16,7 @@ int  main(int argc, char const *argv[]) {
     char *user="root";
     char *password="toor";
     char *database="test";
-
+    int i=0;
     connection = mysql_init(NULL);
     if(!mysql_real_connect(connection,server,user,password,database,0,NULL,0))
     {
@@ -25,6 +25,12 @@ int  main(int argc, char const *argv[]) {
     }
     else
       printf("connection successful\n" );
+      for(i=0;i<10;i++)
+      {
+        printf("%d\n",i);
+        sleep(1);
+      }
+        
 
       if (mysql_query(connection, "show tables"))
       {
