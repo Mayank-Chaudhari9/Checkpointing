@@ -4,6 +4,7 @@
 #include "dmtcp.h"
 #include "config.h"
 
+
 MYSQL *pconnection,*connection;
 char *pserver;
 char *puser;
@@ -31,6 +32,7 @@ MYSQL *mysql_real_connect(MYSQL *mysql,const char *host, const char *user, const
 
 
 
+
 static void checkpoint()
 {
   printf("pdatabase : %s\n",pconnection->db );
@@ -41,7 +43,7 @@ static void checkpoint()
 static void resume()
 {
   connection = mysql_init(NULL);
-NEXT_FNC(mysql_real_connect)(connection,pserver,puser,ppassword,pdatabase,0,NULL,0);
+mysql_real_connect(connection,pserver,puser,ppassword,pdatabase,0,NULL,0);
   printf("------#### The %s plugin has  been checkpointed. #### ------------\n", __FILE__);
   //return connection;
 }

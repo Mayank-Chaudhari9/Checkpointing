@@ -77,7 +77,7 @@ OPTIONS:
       Print this message and exit.'
 
 
-ckpt_timestamp="Mon Nov 14 19:02:48 2016"
+ckpt_timestamp="Tue Nov 15 00:43:00 2016"
 
 coord_host=$DMTCP_HOST
 if test -z "$DMTCP_HOST"; then
@@ -91,7 +91,7 @@ fi
 
 checkpoint_interval=$DMTCP_CHECKPOINT_INTERVAL
 if test -z "$DMTCP_CHECKPOINT_INTERVAL"; then
-  checkpoint_interval=0
+  checkpoint_interval=5
 fi
 export DMTCP_CHECKPOINT_INTERVAL=${checkpoint_interval}
 
@@ -163,7 +163,7 @@ fi
 # Number of hosts in the computation = 1
 # Number of processes in the computation = 1
 
-given_ckpt_files=" /home/devil/Desktop/test/test/ckpt_dmtcp1_19d0e6a6c07e7-40000-5829bcf9.dmtcp"
+given_ckpt_files=" /home/devil/Desktop/test/example/ckpt_test1_19d0e6a6c07e7-42000-582a0c75.dmtcp"
 
 ckpt_files=""
 if [ ! -z "$DMTCP_RESTART_DIR" ]; then
